@@ -1,8 +1,12 @@
 import { combineReducers } from 'redux'
-import movieReducer from './movies/reducer'
+import recipeReducer from './recipes/reducer'
+import shoppingListReducer from './shoppingLists/reducer'
+import ingredientReducer from './ingredients/reducer'
 
 const rootReducer = combineReducers({
-  movies: movieReducer,
+  recipes: recipeReducer,
+  shoppingLists: shoppingListReducer,
+  ingredients: ingredientReducer,
 })
 
 export default rootReducer

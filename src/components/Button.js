@@ -1,22 +1,22 @@
 import styled from 'styled-components'
-import theme from '../helpers/theme'
+import Theme from '../Helpers/Theme'
 
 function getBackgroundColor(props) {
-  if (props.primary) return theme.primary.fill
-  else if (props.danger) return theme.danger.fill
-  else if (props.info) return theme.info.fill
-  else if (props.warning) return theme.warning.fill
-  else if (props.success) return theme.success.fill
-  return theme.default.fill
+  if (props.primary) return Theme.Primary.Fill
+  else if (props.danger) return Theme.Danger.Fill
+  else if (props.info) return Theme.Info.Fill
+  else if (props.warning) return Theme.Warning.Fill
+  else if (props.success) return Theme.Success.Fill
+  return Theme.Default.Fill
 }
 
 function getTextColor(props) {
-  if (props.primary) return theme.primary.color
-  else if (props.danger) return theme.danger.color
-  else if (props.info) return theme.info.color
-  else if (props.warning) return theme.warning.color
-  else if (props.success) return theme.success.color
-  return theme.default.color
+  if (props.primary) return Theme.Primary.Color
+  else if (props.danger) return Theme.Danger.Color
+  else if (props.info) return Theme.Info.Color
+  else if (props.warning) return Theme.Warning.Color
+  else if (props.success) return Theme.Success.Color
+  return Theme.Default.Color
 }
 
 function getPadding(props) {

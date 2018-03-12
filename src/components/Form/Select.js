@@ -1,6 +1,6 @@
 import React from 'react'
 import styled from 'styled-components'
-import Theme from '../../helpers/Theme'
+import Theme from '../../Helpers/Theme'
 
 const SelectStyle = styled.select`
   margin: 5px 0 5px 0;

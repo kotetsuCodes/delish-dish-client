@@ -1,7 +1,9 @@
 import React, { Component } from 'react'
+import auth from '../Helpers/auth'
 import TextInput from '../components/Form/TextInput'
 import Password from '../components/Form/Password'
 import Button from '../components/Button'
+import Alert from '../components/Alert/Alert'
 
 export default class Login extends Component {
   constructor(props) {
@@ -9,53 +11,72 @@ export default class Login extends Component {
     this.state = {
       username: '',
       password: '',
+      loginMessage: '',
     }
+  }
+
+  componentWillMount = () => {
+    if (!auth.checkToken(auth.getToken()).error) this.props.history.push('/recipes')
   }
 
   handleLoginSubmit = (e) => {
     e.preventDefault()
-    console.log(this.state)
 
-    fetch('http://127.0.0.1:5000/account/login', {
+    if (this.state.username.length < 1 || this.state.password.length < 1) {
+      this.setState({ loginMessage: 'Username and password must not be blank' })
+      return
+    }
+
+    fetch(`${process.env.REACT_APP_API_BASE_URL}/account/login`, {
       headers: new Headers({
         'content-type': 'application/json',
       }),
       method: 'POST',
       body: JSON.stringify({ Email: this.state.username, Password: this.state.password }),
     })
-      .then((response) => {
-        if (response && response.ok) alert('Login successful')
-        else alert('Something bad happened')
+      .then(response => response.json())
+      .then((res) => {
+        auth.setToken(res.token)
+        this.props.history.push('/recipes')
       })
       .catch((error) => {
-        alert('Something really bad happened')
+        this.setState({
+          loginMessage: 'Oops...something isn\'t right',
+        })
       })
   }
 
   handleUsernameChange = (e) => {
-    console.log(e.target)
     this.setState({
       username: e.target.value,
+      loginMessage: '',
     })
   }
 
   handlePasswordChange = (e) => {
     this.setState({
       password: e.target.value,
+      loginMessage: '',
     })
   }
 
   render() {
+    const { loginMessage } = this.state
     return (
       <div>
-        <div>username from state: {this.state.username}</div>
-        <div>password from state: {this.state.password}</div>
-
         <form onSubmit={e => this.handleLoginSubmit(e)}>
           <TextInput onChange={e => this.handleUsernameChange(e)} placeholder="Email Address" />
-          <Password onChange={e => this.handlePasswordChange(e)} placeholder="Password" />
-          <Button>Login</Button>
+          <Password
+            type="password"
+            onChange={e => this.handlePasswordChange(e)}
+            placeholder="Password"
+          />
+          <Button primary style={{ display: 'block', width: '100%' }}>
+            Login
+          </Button>
         </form>
+
+        {loginMessage.length > 0 ? <Alert alertType="danger">{loginMessage}</Alert> : null}
       </div>
     )
   }
