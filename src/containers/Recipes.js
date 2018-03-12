@@ -4,7 +4,7 @@ import RecipeList from '../components/recipes/recipeList'
 
 function mapStateToProps(state) {
   return {
-    recipes: state.recipes.get('recipes'),
+    recipeData: state.recipes.toJS(),
   }
 }
 

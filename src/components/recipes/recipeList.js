@@ -6,11 +6,11 @@ export default class RecipeList extends Component {
   }
 
   render() {
-    const { recipes } = this.props
+    const { recipeData } = this.props
 
     return (
       <div>
-        {recipes.map(recipe => (
+        {recipeData.recipes.map(recipe => (
           <div key={recipe.Id}>
             <span>Title: {recipe.title}</span>
           </div>
