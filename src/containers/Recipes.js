@@ -1,5 +1,5 @@
 import { connect } from 'react-redux'
-import { getRecipes } from '../redux/recipes/actions'
+import { getRecipes, createRecipe } from '../redux/recipes/actions'
 import RecipeList from '../components/recipes/recipeList'
 
 function mapStateToProps(state) {
@@ -11,6 +11,7 @@ function mapStateToProps(state) {
 function mapDispatchToProps(dispatch) {
   return {
     getRecipes: () => dispatch(getRecipes()),
+    createRecipe: recipe => dispatch(createRecipe(recipe)),
   }
 }
 
