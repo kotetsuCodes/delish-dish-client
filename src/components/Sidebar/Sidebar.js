@@ -1,6 +1,6 @@
 import styled from 'styled-components'
 import { NavLink } from 'react-router-dom'
-import Theme from '../../Helpers/Theme'
+import Theme from '../../helpers/theme'
 
 export const SideNav = styled.ul`
   margin-top: 50px;

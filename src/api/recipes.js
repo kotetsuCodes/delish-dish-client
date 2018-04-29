@@ -1,16 +1,15 @@
-import { getAuthHeaders } from '../Helpers/api'
+import { getAuthHeaders } from '../helpers/api'
 
 const baseApiUrl = process.env.REACT_APP_API_BASE_URL
 
 export default {
   getRecipes: () =>
-    fetch(`${baseApiUrl}/Recipe/GetRecipes`, {
+    fetch(`${baseApiUrl}/dishes`, {
       headers: getAuthHeaders(),
-      method: 'POST',
-      body: JSON.stringify({}),
+      method: 'GET',
     }).then(response => response.json()),
   createRecipe: recipe =>
-    fetch(`${baseApiUrl}/Recipe/CreateRecipe`, {
+    fetch(`${baseApiUrl}/dishes`, {
       headers: getAuthHeaders(),
       method: 'POST',
       body: JSON.stringify(recipe),

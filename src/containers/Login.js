@@ -1,5 +1,5 @@
 import React, { Component } from 'react'
-import auth from '../Helpers/auth'
+import auth from '../helpers/auth'
 import TextInput from '../components/Form/TextInput'
 import Password from '../components/Form/Password'
 import Button from '../components/Button'
@@ -27,16 +27,16 @@ export default class Login extends Component {
       return
     }
 
-    fetch(`${process.env.REACT_APP_API_BASE_URL}/account/login`, {
+    fetch(`${process.env.REACT_APP_API_BASE_URL}/auth_user`, {
       headers: new Headers({
         'content-type': 'application/json',
       }),
       method: 'POST',
-      body: JSON.stringify({ Email: this.state.username, Password: this.state.password }),
+      body: JSON.stringify({ email: this.state.username, password: this.state.password }),
     })
       .then(response => response.json())
       .then((res) => {
-        auth.setToken(res.token)
+        auth.setToken(res.auth_token)
         this.props.history.push('/recipes')
       })
       .catch((error) => {

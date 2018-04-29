@@ -5,7 +5,7 @@ import Recipes from './containers/Recipes'
 import ShoppingLists from './containers/ShoppingLists'
 import Ingredients from './containers/Ingredients'
 import Login from './containers/Login'
-import auth from './Helpers/auth'
+import auth from './helpers/auth'
 import {
   Sidebar,
   SideNav,

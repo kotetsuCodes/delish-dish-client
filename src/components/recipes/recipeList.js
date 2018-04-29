@@ -2,7 +2,7 @@ import React, { Component } from 'react'
 import TextInput from '../../components/Form/TextInput'
 import Button from '../../components/Button'
 import { Card, CardTitle, CardContent } from '../../components/Card'
-import Theme from '../../Helpers/Theme'
+import Theme from '../../helpers/theme'
 
 const initState = {
   showCreateForm: false,

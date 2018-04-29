@@ -1,5 +1,5 @@
 import styled from 'styled-components'
-import Theme from '../../Helpers/Theme'
+import Theme from '../../helpers/theme'
 
 function getBackgroundColor(alertType) {
   switch (alertType.toLowerCase()) {

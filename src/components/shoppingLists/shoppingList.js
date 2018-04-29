@@ -12,7 +12,7 @@ export default class ShoppingList extends Component {
     return (
       <div>
         {shoppingListData.shoppingLists.map(list => (
-          <div key={list.Id}>
+          <div key={list.id}>
             <span>Title: {list.title}</span>
           </div>
         ))}
