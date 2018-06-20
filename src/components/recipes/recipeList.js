@@ -7,8 +7,8 @@ import Theme from '../../helpers/theme'
 const initState = {
   showCreateForm: false,
   recipe: {
-    name: '',
-    imageUrl: '',
+    title: '',
+    image_url: '',
     ingredients: [],
     instructions: [],
   },
@@ -27,12 +27,12 @@ export default class RecipeList extends Component {
     this.setState(initState)
   }
 
-  handleNameChange = (e) => {
-    this.setState({ recipe: { ...this.state.recipe, name: e.target.value } })
+  handleTitleChange = (e) => {
+    this.setState({ recipe: { ...this.state.recipe, title: e.target.value } })
   }
 
   handleImageUrlChange = (e) => {
-    this.setState({ recipe: { ...this.state.recipe, imageUrl: e.target.value } })
+    this.setState({ recipe: { ...this.state.recipe, image_url: e.target.value } })
   }
 
   handleIngredientAmountTypeChange = (e, ingredientIndex) => {
@@ -40,7 +40,7 @@ export default class RecipeList extends Component {
       recipe: {
         ...this.state.recipe,
         ingredients: this.state.recipe.ingredients.map((ingredient, index) => {
-          if (ingredientIndex === index) ingredient.amountLabel = e.target.value
+          if (ingredientIndex === index) ingredient.quantity_name = e.target.value
 
           return ingredient
         }),
@@ -53,7 +53,7 @@ export default class RecipeList extends Component {
       recipe: {
         ...this.state.recipe,
         ingredients: this.state.recipe.ingredients.map((ingredient, index) => {
-          if (ingredientIndex === index) ingredient.amountValue = e.target.value
+          if (ingredientIndex === index) ingredient.quantity_value = e.target.value
 
           return ingredient
         }),
@@ -61,12 +61,12 @@ export default class RecipeList extends Component {
     })
   }
 
-  handleIngredientNameChange = (e, ingredientIndex) => {
+  handleIngredientTitleChange = (e, ingredientIndex) => {
     this.setState({
       recipe: {
         ...this.state.recipe,
         ingredients: this.state.recipe.ingredients.map((ingredient, index) => {
-          if (ingredientIndex === index) ingredient.name = e.target.value
+          if (ingredientIndex === index) ingredient.title = e.target.value
 
           return ingredient
         }),
@@ -79,7 +79,7 @@ export default class RecipeList extends Component {
       recipe: {
         ...this.state.recipe,
         instructions: this.state.recipe.instructions.map((instruction, index) => {
-          if (instructionIndex === index) instruction.content = e.target.value
+          if (instructionIndex === index) instruction.instruction_content = e.target.value
 
           return instruction
         }),
@@ -98,9 +98,9 @@ export default class RecipeList extends Component {
       recipe: {
         ...this.state.recipe,
         ingredients: this.state.recipe.ingredients.concat({
-          name: '',
-          amountLabel: '',
-          amountValue: '',
+          title: '',
+          quantity_name: '',
+          quantity_value: '',
         }),
       },
     })
@@ -112,8 +112,8 @@ export default class RecipeList extends Component {
       recipe: {
         ...this.state.recipe,
         instructions: this.state.recipe.instructions.concat({
-          instructionOrder: this.state.recipe.instructions.length + 1,
-          content: e.target.value,
+          order: this.state.recipe.instructions.length + 1,
+          instruction_content: e.target.value,
         }),
       },
     })
@@ -125,19 +125,21 @@ export default class RecipeList extends Component {
 
     return (
       <div>
-        {recipeData.recipes.map(recipe => (
-          <div key={recipe.recipeId}>
-            <span>Name: {recipe.name}</span>
-          </div>
-        ))}
+        {recipeData.recipes
+          ? recipeData.recipes.map(recipe => (
+            <div key={recipe.id}>
+              <span>Name: {recipe.title}</span>
+            </div>
+            ))
+          : null}
 
         <Button primary onClick={e => this.toggleCreateForm(e, true)}>
-          Add Recipe
+          Add Dish
         </Button>
 
         {showCreateForm ? (
           <form onSubmit={e => this.createRecipe(e)}>
-            <TextInput placeholder="Recipe name" onChange={e => this.handleNameChange(e)} />
+            <TextInput placeholder="Dish Name" onChange={e => this.handleTitleChange(e)} />
             <TextInput placeholder="Image Url" onChange={e => this.handleImageUrlChange(e)} />
 
             <Card
@@ -152,7 +154,7 @@ export default class RecipeList extends Component {
                   <div>
                     <TextInput
                       placeholder="Name"
-                      onChange={e => this.handleIngredientNameChange(e, index)}
+                      onChange={e => this.handleIngredientTitleChange(e, index)}
                     />
                     <TextInput
                       placeholder="Amount"
@@ -178,7 +180,7 @@ export default class RecipeList extends Component {
 
               <CardContent>
                 {this.state.recipe.instructions.map((instruction, index) => (
-                  <div>
+                  <div key={instruction.order}>
                     <TextInput
                       placeholder="Instruction"
                       onChange={e => this.handleInstructionChange(e, index)}

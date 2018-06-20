@@ -1,38 +1,62 @@
 import React from 'react'
 import styled from 'styled-components'
-import Icon from '../Icon'
+import CheckedIcon from '../Icons/CheckedIcon'
+import UnCheckedIcon from '../Icons/UnCheckedIcon'
+
+function getFontSize(size) {
+  switch (size) {
+    case 'small':
+      return '0.8rem'
+    case 'medium':
+      return '1rem'
+    case 'large':
+      return '1.2rem'
+    default:
+      return ''
+  }
+}
 
 const CheckboxStyle = styled.div`
-  padding-left: 16px;
+  padding-left: 10px;
   margin: 5px 0 5px 0;
 `
 
 const CheckboxLabelStyle = styled.label`
-  padding-left: 16px;
-  margin: 5px;
-`
-
-const checkIcon = styled.i`
-  font-size: 2rem;
+  padding-left: 10px;
+  font-size: ${props => getFontSize(props.size)};
 `
 
 export default class extends React.Component {
+  state = {
+    isChecked: false,
+  }
+
+  handleCheckToggle = (e, onClickAction) => {
+    this.setState({ isChecked: !this.state.isChecked })
+    onClickAction()
+  }
+
   render() {
     const {
-      id, labelDisplay, isChecked, size, handleClick,
+      id, labelDisplay, size, onClickAction,
     } = this.props
 
-    console.log('checkbox re-rendering')
-    console.log(`checkbox is ${isChecked}`)
-
     return (
-      <div onClick={e => handleClick(e)}>
-        {isChecked ? (
-          <Icon size={size} className="far fa-check-square" />
+      <div
+        onClick={e => this.handleCheckToggle(e, onClickAction)}
+        style={{
+          display: 'flex',
+          alignItems: 'center',
+        }}
+      >
+        {this.state.isChecked ? (
+          <CheckedIcon width={24} height={24} />
         ) : (
-          <Icon size={size} className="far fa-square" />
+          <UnCheckedIcon width={24} height={24} />
         )}
-        <CheckboxLabelStyle htmlFor={id}>{labelDisplay}</CheckboxLabelStyle>
+        <CheckboxLabelStyle size={size} htmlFor={id}>
+          {labelDisplay}
+        </CheckboxLabelStyle>
       </div>
     )
   }

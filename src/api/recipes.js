@@ -12,6 +12,10 @@ export default {
     fetch(`${baseApiUrl}/dishes`, {
       headers: getAuthHeaders(),
       method: 'POST',
-      body: JSON.stringify(recipe),
+      body: JSON.stringify({
+        ...recipe,
+        instructions_attributes: recipe.instructions,
+        ingredients_attributes: recipe.ingredients,
+      }),
     }).then(response => response.json()),
 }

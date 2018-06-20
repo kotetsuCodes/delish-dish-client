@@ -1,9 +1,13 @@
 import { connect } from 'react-redux'
-import { getShoppingLists } from '../redux/shoppingLists/actions'
+import {
+  getShoppingLists,
+  getDishesForShoppingList,
+  createShoppingList,
+  getRecipes,
+} from '../redux/shoppingLists/actions'
 import ShoppingList from '../components/shoppingLists/shoppingList'
 
 function mapStateToProps(state) {
-  console.log(state)
   return {
     shoppingListData: state.shoppingLists.toJS(),
   }
@@ -11,9 +15,15 @@ function mapStateToProps(state) {
 
 function mapDispatchToProps(dispatch) {
   return {
+    getRecipes: () => dispatch(getRecipes()),
     getShoppingLists: () => dispatch(getShoppingLists()),
+    getDishesForShoppingList: shoppingListId => dispatch(getDishesForShoppingList(shoppingListId)),
+    createShoppingList: shoppingList => dispatch(createShoppingList(shoppingList)),
   }
 }
 
-const VisibleShoppingLists = connect(mapStateToProps, mapDispatchToProps)(ShoppingList)
+const VisibleShoppingLists = connect(
+  mapStateToProps,
+  mapDispatchToProps,
+)(ShoppingList)
 export default VisibleShoppingLists

@@ -1,5 +1,5 @@
 import styled from 'styled-components'
-import Theme from '../helpers/theme'
+import Theme from '../Helpers/Theme'
 
 function getBackgroundColor(props) {
   if (props.primary) return Theme.Primary.Fill
@@ -24,12 +24,12 @@ function getPadding(props) {
   else if (props.small) return '8px'
   else if (props.medium) return '10px'
   else if (props.large) return '14px'
-  return '16px'
+  return '10px'
 }
 
 export default styled.button`
   cursor: pointer;
-  font-size: 1rem;
+  font-size: 0.8rem;
   margin: 5px;
   background-color: ${props => getBackgroundColor(props)};
   color: ${props => getTextColor(props)};
@@ -39,5 +39,9 @@ export default styled.button`
 
   &:focus {
     outline: none;
+  }
+
+  &:active {
+    background-color: ;
   }
 `

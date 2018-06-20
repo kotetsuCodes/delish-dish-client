@@ -4,10 +4,10 @@ import Theme from '../../Helpers/Theme'
 
 const SelectStyle = styled.select`
   margin: 5px 0 5px 0;
-  font-size: 1.25rem;
+  font-size: 0.8rem;
   display: 'block';
-  padding: 16px;
-  border-radius: 2px;
+  padding: 10px;
+  border-radius: 4px;
   border: 1px solid ${Theme.MainColors.White};
   outline: none;
   width: 100%;

@@ -16,7 +16,11 @@ export default class Login extends Component {
   }
 
   componentWillMount = () => {
-    if (!auth.checkToken(auth.getToken()).error) this.props.history.push('/recipes')
+    const token = auth.getToken()
+
+    if (token && !token.hasOwnProperty('error')) {
+      this.props.history.push('/recipes')
+    }
   }
 
   handleLoginSubmit = (e) => {

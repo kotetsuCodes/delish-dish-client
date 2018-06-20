@@ -40,11 +40,13 @@ export default class IngredientList extends Component {
 
     return (
       <div>
-        {ingredientData.ingredients.map(ingredient => (
-          <div key={ingredient.Id}>
-            <span>{ingredient.name}</span>
-          </div>
-        ))}
+        {ingredientData.ingredients
+          ? ingredientData.ingredients.map(ingredient => (
+            <div key={ingredient.Id}>
+              <span>{ingredient.name}</span>
+            </div>
+            ))
+          : null}
 
         <Button primary onClick={e => this.toggleCreateForm(e, true)}>
           Add Ingredient

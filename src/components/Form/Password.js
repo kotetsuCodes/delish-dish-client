@@ -1,5 +1,5 @@
 import styled from 'styled-components'
-import Theme from '../../helpers/theme'
+import Theme from '../../Helpers/Theme'
 
 export default styled.input`
   margin: 5px 0 5px 0;

@@ -6,34 +6,22 @@ import ShoppingLists from './containers/ShoppingLists'
 import Ingredients from './containers/Ingredients'
 import Login from './containers/Login'
 import auth from './helpers/auth'
-import {
-  Sidebar,
-  SideNav,
-  SideNavItem,
-  SideNavLink,
-  activeLink,
-} from './components/Sidebar/Sidebar'
-import Icon from './components/Icon'
+import { Sidebar, NavItem } from './components/Sidebar/Sidebar'
+import CloudIcon from './components/Icons/CloudIcon'
 
 const MainSideBar = (
   <Sidebar width="200px">
-    <SideNav>
-      <SideNavItem>
-        <SideNavLink to="/Recipes" activeClassName={activeLink}>
-          <Icon size="small" className="fas fa-book" /> Recipes
-        </SideNavLink>
-      </SideNavItem>
-      <SideNavItem>
-        <SideNavLink to="/ShoppingLists">
-          <Icon size="small" className="fas fa-book" /> Shopping Lists
-        </SideNavLink>
-      </SideNavItem>
-      <SideNavItem>
-        <SideNavLink to="/Ingredients">
-          <Icon size="small" className="fas fa-book" /> Ingredients
-        </SideNavLink>
-      </SideNavItem>
-    </SideNav>
+    <NavItem linkTo="/Recipes" linkText="Dishes" icon={<CloudIcon width={24} height={24} />} />
+    <NavItem
+      linkTo="/ShoppingLists"
+      linkText="Shopping Lists"
+      icon={<CloudIcon width={24} height={24} />}
+    />
+    <NavItem
+      linkTo="/Ingredients"
+      linkText="Ingredients"
+      icon={<CloudIcon width={24} height={24} />}
+    />
   </Sidebar>
 )
 
@@ -71,7 +59,7 @@ export default (
         <Route exact path="/Login" component={Login} history />
         <PrivateRoute exact path="/Recipes" component={Recipes} sidebar={MainSideBar} />
         <PrivateRoute exact path="/ShoppingLists" component={ShoppingLists} sidebar={MainSideBar} />
-        <PrivateRoute exact path="/Ingredients" component={Ingredients} sidebar={MainSideBar} />
+        {/* <PrivateRoute exact path="/Ingredients" component={Ingredients} sidebar={MainSideBar} /> */}
       </Switch>
     </div>
   </Router>
